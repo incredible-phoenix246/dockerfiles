@@ -1,1 +1,1 @@
-ssh homeworkai@staging.aiforhomework.com
+ssh homeworkai@176.123.2.210
