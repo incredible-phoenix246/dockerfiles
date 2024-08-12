@@ -1,0 +1,7 @@
+docker exec -it my-postgres-container /bin/bash
+
+
+pg_dump -U your_username -s -d your_database > /tmp/schema.sql
+
+
+docker cp my-postgres-container:/tmp/schema.sql ./schema.sql
