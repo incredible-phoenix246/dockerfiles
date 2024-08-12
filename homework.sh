@@ -1,0 +1,1 @@
+ssh homeworkai@staging.aiforhomework.com
