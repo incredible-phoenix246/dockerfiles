@@ -6,14 +6,14 @@ COMPOSE_FILE="docker-compose.yml"
 # Function to start the Docker Compose services
 start_services() {
   echo "Starting Docker Compose services..."
-  docker-compose -f $COMPOSE_FILE up -d
+  docker compose -f $COMPOSE_FILE up -d
   echo "Services are up and running."
 }
 
 # Function to stop the Docker Compose services
 stop_services() {
   echo "Stopping Docker Compose services..."
-  docker-compose -f $COMPOSE_FILE down
+  docker compose -f $COMPOSE_FILE down
   echo "Services have been stopped."
 }
 
