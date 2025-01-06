@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   postgres:
     image: postgres:16
@@ -12,6 +10,20 @@ services:
       POSTGRES_DB: your_database
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    networks:
+      - my-network
+
+  postgres_secondary:
+    image: postgres:16
+    container_name: my-postgres-secondary-container
+    ports:
+      - "6002:5432"
+    environment:
+      POSTGRES_USER: your_username_secondary
+      POSTGRES_PASSWORD: your_password_secondary
+      POSTGRES_DB: your_database_secondary
+    volumes:
+      - postgres-secondary-data:/var/lib/postgresql/data
     networks:
       - my-network
 
@@ -36,8 +48,47 @@ services:
     networks:
       - my-network
 
+  cog-backend-db:
+    image: postgres:16
+    container_name: cog-backend-postgres-container
+    ports:
+      - "6003:5432" # You can adjust this port if needed
+    environment:
+      POSTGRES_USER: cod
+      POSTGRES_PASSWORD: backend
+      POSTGRES_DB: backend
+    volumes:
+      - cog-backend-postgres-data:/var/lib/postgresql/data
+    networks:
+      - my-network
+
+  bill-ease-db:
+    image: postgres:16
+    container_name: bill-ease-postgres-container
+    ports:
+      - "6004:5432"
+    environment:
+      POSTGRES_USER: bill_ease_user
+      POSTGRES_PASSWORD: bill_ease_password
+      POSTGRES_DB: bill_ease_db
+    volumes:
+      - bill-ease-postgres-data:/var/lib/postgresql/data
+    networks:
+      - my-network
+
+  bill-ease-redis:
+    image: redis:latest
+    container_name: bill-ease-redis-container
+    ports:
+      - "6380:6379"
+    networks:
+      - my-network
+
 volumes:
   postgres-data:
+  postgres-secondary-data:
+  cog-backend-postgres-data:
+  bill-ease-postgres-data:
 
 networks:
   my-network:
